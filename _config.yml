@@ -81,6 +81,17 @@ deploy:
   repo: git@github.com:findtheonlyway/findtheonlyway.github.io.git
   branch: master
 
+# Extensions
+## Plugins: http://hexo.io/plugins/
+#RSS订阅
+plugin:
+- hexo-generator-feed
+#Feed Atom
+feed:
+type: atom
+path: atom.xml
+limit: 20
+
 jsonContent:
     meta: false
     pages: false
@@ -99,3 +110,4 @@ jsonContent:
       excerpt: false
       categories: false
       tags: true
+
