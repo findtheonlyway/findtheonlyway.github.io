@@ -1,0 +1,178 @@
+
+<!DOCTYPE html>
+<html lang class="loading">
+<head><meta name="generator" content="Hexo 3.9.0">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>为Hexo yilia主题添加gitalk评论 - MadWolF</title>
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="google" content="notranslate">
+    <meta name="keywords" content="MadWolF,"> 
+    <meta name="description" content="云巅独啸霜晨月 大野孤行雪地风,最近发现gitalk这个评论非常nice，比gitment好用，Gitalk 是一个基于 Github Issue 和 Preact 开发的评论插件。
+主页：https://github.com/g,"> 
+    <meta name="author" content="MadWolF"> 
+    <link rel="alternative" href="atom.xml" title="MadWolF" type="application/atom+xml"> 
+    <link rel="icon" href="/img/favicon.ico"> 
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
+    <link rel="stylesheet" href="/css/diaspora.css">
+    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <script>
+         (adsbygoogle = window.adsbygoogle || []).push({
+              google_ad_client: "ca-pub-8691406134231910",
+              enable_page_level_ads: true
+         });
+    </script>
+    <script async custom-element="amp-auto-ads" src="https://cdn.ampproject.org/v0/amp-auto-ads-0.1.js">
+    </script>
+</head>
+</html>
+<body class="loading">
+    <span id="config-title" style="display:none">MadWolF</span>
+    <div id="loader"></div>
+    <div id="single">
+    <div id="top" style="display: block;">
+    <div class="bar" style="width: 0;"></div>
+    <a class="icon-home image-icon" href="javascript:;" data-url="http://madwolf.xyz"></a>
+    <div title="播放/暂停" class="icon-play"></div>
+    <h3 class="subtitle">为Hexo yilia主题添加gitalk评论</h3>
+    <div class="social">
+        <!--<div class="like-icon">-->
+            <!--<a href="javascript:;" class="likeThis active"><span class="icon-like"></span><span class="count">76</span></a>-->
+        <!--</div>-->
+        <div>
+            <div class="share">
+                <a title="获取二维码" class="icon-scan" href="javascript:;"></a>
+            </div>
+            <div id="qr"></div>
+        </div>
+    </div>
+    <div class="scrollbar"></div>
+</div>
+
+    <div class="section">
+        <div class="article">
+    <div class='main'>
+        <h1 class="title">为Hexo yilia主题添加gitalk评论</h1>
+        <div class="stuff">
+            <span>五月 01, 2018</span>
+            
+  <ul class="post-tags-list"><li class="post-tags-list-item"><a class="post-tags-list-link" href="/tags/Hexo/">Hexo</a></li></ul>
+
+
+        </div>
+        <div class="content markdown">
+            <p>最近发现gitalk这个评论非常nice，比gitment好用，Gitalk 是一个基于 Github Issue 和 Preact 开发的评论插件。</p>
+<p>主页：<a href="https://github.com/gitalk/gitalk/blob/master/readme-cn.md" target="_blank" rel="noopener">https://github.com/gitalk/gitalk/blob/master/readme-cn.md</a><br>gitalk 需要添加的部分主页有详细介绍，这里只谈针对yilia需要的改动</p>
+<h3 id="创建gitalk-ejs"><a href="#创建gitalk-ejs" class="headerlink" title="创建gitalk.ejs"></a>创建gitalk.ejs</h3><p>在你的hexo目录/theme/yilia/layout/_partial/post/目录下创建 gitalk.ejs并写入如下内容：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">&lt;div id=<span class="string">"gitalk-container"</span>&gt;&lt;/div&gt;</span><br><span class="line">&lt;link rel=<span class="string">"stylesheet"</span> href=<span class="string">"https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css"</span>&gt;</span><br><span class="line">&lt;script src=<span class="string">"https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"</span>&gt;&lt;/script&gt;</span><br><span class="line">&lt;script src=<span class="string">"https://cdn.bootcss.com/blueimp-md5/2.10.0/js/md5.js"</span>&gt;&lt;/script&gt;</span><br><span class="line"></span><br><span class="line">&lt;script&gt;</span><br><span class="line"><span class="keyword">var</span> gitalk = <span class="keyword">new</span> Gitalk(&#123;</span><br><span class="line">  clientID: <span class="string">'&lt;%=theme.gitalk.clientID%&gt;'</span>,</span><br><span class="line">  clientSecret: <span class="string">'&lt;%=theme.gitalk.clientSecret%&gt;'</span>,</span><br><span class="line">  repo: <span class="string">'&lt;%=theme.gitalk.repo%&gt;'</span>,</span><br><span class="line">  owner: <span class="string">'&lt;%=theme.gitalk.owner%&gt;'</span>,</span><br><span class="line">  admin: [<span class="string">'&lt;%=theme.gitalk.admin%&gt;'</span>],</span><br><span class="line">  id: md5(<span class="built_in">window</span>.location.pathname),</span><br><span class="line">  distractionFreeMode: &lt;%=theme.gitalk.distractionFreeMode%&gt;</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line">gitalk.render('gitalk-container')</span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></table></figure>
+
+<a id="more"></a>
+<h3 id="修改article-ejs"><a href="#修改article-ejs" class="headerlink" title="修改article.ejs"></a>修改article.ejs</h3><p>在你的hexo目录/theme/yilia/layout/_partial/article.ejs文件中最后一行“&lt;% } %&gt;”之前添加如下内容：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&lt;% <span class="keyword">if</span>(theme.gitalk.enable &amp;&amp; theme.gitalk.distractionFreeMode)&#123; %&gt;</span><br><span class="line">      &lt;%- partial(<span class="string">'post/gitalk'</span>, &#123;</span><br><span class="line">      key: post.slug,</span><br><span class="line">      title: post.title,</span><br><span class="line">      url: config.url+url_for(post.path)</span><br><span class="line">    &#125;) %&gt;</span><br><span class="line">  &lt;% &#125; %&gt;</span><br></pre></td></tr></table></figure>
+
+<h3 id="添加配置文件"><a href="#添加配置文件" class="headerlink" title="添加配置文件"></a>添加配置文件</h3><p>在yilia的配置文件_config.yml中gitment配置下面添加如下配置文件</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">\#6.</span> <span class="string">Gitalk</span></span><br><span class="line"><span class="string">\#</span> <span class="string">Gitalk</span></span><br><span class="line"><span class="attr">gitalk:</span> </span><br><span class="line"><span class="attr">  enable:</span> <span class="literal">true</span>    <span class="comment">#用来做启用判断可以不用</span></span><br><span class="line"><span class="attr">  clientID:</span> <span class="string">'your clientID'</span>    <span class="comment">#Github上生成的</span></span><br><span class="line"><span class="attr">  clientSecret:</span> <span class="string">'your clientSecret'</span>   <span class="comment">#同上</span></span><br><span class="line"><span class="attr">  repo:</span> <span class="string">git_comment</span>    <span class="comment">#评论所在的github project</span></span><br><span class="line"><span class="attr">  owner:</span> <span class="string">findtheonlyway</span>    <span class="comment">#github用户名</span></span><br><span class="line"><span class="attr">  admin:</span> <span class="string">erbiduo</span>    <span class="comment">#可以初始化评论issue的github账户名称</span></span><br><span class="line"><span class="attr">  distractionFreeMode:</span> <span class="literal">true</span></span><br></pre></td></tr></table></figure>
+
+<p>大功告成！</p>
+
+            <!--[if lt IE 9]><script>document.createElement('audio');</script><![endif]-->
+            <audio id="audio" loop="1" preload="auto" controls="controls" data-autoplay="true">
+                <source type="audio/mpeg" src="">
+            </audio>
+            
+                <ul id="audio-list" style="display:none">
+                    
+                        <li title='0' data-url='http://link.hhtjim.com/163/5146554.mp3'></li>
+                    
+                        <li title='1' data-url='http://link.hhtjim.com/qq/001faIUs4M2zna.mp3'></li>
+                    
+                </ul>
+            
+        </div>
+        
+    <div id='gitalk-container' class="comment link"
+        data-ae='true'
+        data-ci='4636f9d2e22d215ebd07'
+        data-cs='c7acf5d255d1454cfcbb2dee25bd8aa96f482f91'
+        data-r='gitment'
+        data-o='findtheonlyway'
+        data-a='findtheonlyway'
+        data-d='true'
+    >查看评论</div>
+
+
+    </div>
+    
+        <div class='side'>
+            <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#创建gitalk-ejs"><span class="toc-number">1.</span> <span class="toc-text">创建gitalk.ejs</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#修改article-ejs"><span class="toc-number">2.</span> <span class="toc-text">修改article.ejs</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#添加配置文件"><span class="toc-number">3.</span> <span class="toc-text">添加配置文件</span></a></li></ol>
+        </div>
+    
+</div>
+
+
+    </div>
+</div>
+</body>
+<script src="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
+<script src="//lib.baomitu.com/jquery/1.8.3/jquery.min.js"></script>
+<script src="/js/plugin.js"></script>
+<script src="/js/diaspora.js"></script>
+<link rel="stylesheet" href="/photoswipe/photoswipe.css">
+<link rel="stylesheet" href="/photoswipe/default-skin/default-skin.css">
+<script src="/photoswipe/photoswipe.min.js"></script>
+<script src="/photoswipe/photoswipe-ui-default.min.js"></script>
+
+<!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+            <div class="pswp__top-bar">
+                <!--  Controls are self-explanatory. Order can be changed. -->
+                <div class="pswp__counter"></div>
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                      <div class="pswp__preloader__cut">
+                        <div class="pswp__preloader__donut"></div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div> 
+            </div>
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+</html>
